@@ -2,7 +2,7 @@ import math
 import streamlit as st
 from datetime import datetime
 
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = True
 
 st.set_page_config(page_title="Mod Pay Tracker", page_icon="🎫")
 
@@ -48,7 +48,7 @@ if st.button("Calculate", type="primary"):
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Tickets", totalTickets)
         col2.metric("Status", status)
-        col3.metric("Mod Pay", f"{modPay:,}")
+        col3.metric("Mod Pay", f"${modPay:,}")
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
         entry = (
@@ -59,3 +59,24 @@ if st.button("Calculate", type="primary"):
 
         with open("datastore.txt", "a", encoding="utf-8") as file:
             file.write(entry)
+
+st.divider()
+st.subheader("📋 Submitted Entries History")
+
+try:
+    with open("datastore.txt", "r", encoding="utf-8") as file:
+        logs = file.read()
+        
+    if logs.strip():
+        st.text_area("Log Entries", logs, height=200)
+        
+        st.download_button(
+            label="📥 Download History File",
+            data=logs,
+            file_name="datastore.txt",
+            mime="text/plain"
+        )
+    else:
+        st.info("No entries recorded in datastore.txt yet.")
+except FileNotFoundError:
+    st.info("No entries recorded yet. Submit a calculation to start logging!")
