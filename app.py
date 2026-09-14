@@ -48,7 +48,7 @@ if st.button("Calculate", type="primary"):
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Tickets", totalTickets)
         col2.metric("Status", status)
-        col3.metric("Mod Pay", f"${modPay:,}")
+        col3.metric("Mod Pay", f"{modPay:,}")
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
         entry = (
