@@ -2,7 +2,7 @@ import math
 import streamlit as st
 from datetime import datetime
 
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 
 st.set_page_config(page_title="Mod Pay Tracker", page_icon="🎫")
 
