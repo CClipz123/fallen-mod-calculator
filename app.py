@@ -2,7 +2,7 @@ import math
 import streamlit as st
 from datetime import datetime
 
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = True
 
 st.set_page_config(page_title="Mod Pay Tracker", page_icon="🎫")
 
@@ -29,6 +29,7 @@ st.title("🎫 Moderator Ticket & Pay Tracker")
 moderatorName = st.text_input("Moderator Name")
 weekendTickets = st.number_input("Tickets done from Friday to Sunday:", min_value=0, step=1)
 weekdayTickets = st.number_input("Tickets done from Monday to Thursday:", min_value=0, step=1)
+ticketsUntilModPay = st.number_input("[OPTIONAL] Mod pay goal:", min_value=0, step=1)
 
 if st.button("Calculate", type="primary"):
     if not moderatorName.strip():
